@@ -1,0 +1,14 @@
+[options]
+mode prove
+
+[engines]
+smtbmc
+
+[script]
+read -formal wrapper.v cpu.v
+prep -top wrapped_oak8m14
+
+[files]
+wrapper.v
+properties.v
+oak8m14-src/src/cpu.v

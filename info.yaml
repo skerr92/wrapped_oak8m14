@@ -1,0 +1,47 @@
+--- 
+# information
+project: 
+  title: "OAK8M14 Microcontroller CPU"
+  description: "A simple 8-Bit CPU that will be the heart of future microcontroller implementations"
+  picture: docs/oak8m14.png
+  author: "Seth Kerr"
+  license: LICENSE
+  waive_module_test: true
+  waive_caravel: true
+
+# optional interfaces you want to use: gpio, la1, la2, la3, irq, clk2, wishbone & openram
+interfaces: ['gpio', 'wishbone', 'openram']
+
+# test within caravel
+caravel_test:
+  recipe: "coco_test"
+  directory: "caravel_oak8m14"
+  id: 0
+  module_name: "wrapped_oak8m14"
+
+# module test
+module_test:
+  recipe: "all" 
+  directory: "project directory"
+  makefile: "Makefile"
+
+# run the wrapper formal proof
+wrapper_proof:
+  directory: "."
+  sby: "properties.sby"
+
+# openlane config, used in case I need to re-harden
+openlane:
+  config: "config.json"
+
+# source required for various configs and module instantiation
+source:
+    - wrapper.v
+    - oak8m14-src/src/cpu.v
+
+# gds - check nothing on metal 5, DRC & LVS
+final:
+  directory: "final"
+  gds_filename: "gds/wrapped_oak8m14.gds"
+  lvs_filename: "verilog/gl/wrapped_oak8m14.v"
+  lef_filename: "lef/wrapped_oak8m14.lef"
