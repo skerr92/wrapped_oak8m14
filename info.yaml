@@ -16,7 +16,7 @@ interfaces: ['gpio', 'wishbone', 'openram']
 caravel_test:
   recipe: "coco_test"
   directory: "caravel_oak8m14"
-  id: 0
+  id: 3
   module_name: "wrapped_oak8m14"
 
 # module test
